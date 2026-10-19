@@ -57,11 +57,9 @@ print(mse(VectorPairInput(predicted = [0,0,0], expected = [0,0,0])))
 
 def prime_factorization(data: PositiveIntegerInput) -> str:
     number = data.value
-    if number == 1:
-        return "(1)"
     s = []
     a = 2
-    while number > 1:
+    while a * a <= number:
         if number % a == 0:
             c = 0
             while number % a == 0:
@@ -70,21 +68,23 @@ def prime_factorization(data: PositiveIntegerInput) -> str:
             if c == 1:
                 s.append(f"({a})")
             else:
-                s.append(f"({a}**{c})")         
-        a += 1
+                s.append(f"({a}**{c})")
+        a += 1  
+    if number > 1:
+        s.append(f"({number})")
+        
     return "".join(s)
 
 print(prime_factorization(PositiveIntegerInput(value=86240)))
 print(prime_factorization(PositiveIntegerInput(value=345)))
 
+
 def pyramid(data: PositiveIntegerInput) -> int | str:
     cube_count = data.value
-    k = 1 
+    k = 1
     all = 0
-    if cube_count == 0:
-        return 0
     while all < cube_count:
-        all += k**2
+        all += k ** 2
         if all == cube_count:
             return k
         k += 1
